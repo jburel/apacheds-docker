@@ -226,11 +226,11 @@ def process(ns, dn, modlist, action="add"):
         try:
             try:
                 if action == "add":
-                    result = conn.add_s([dn], modlist)
+                    result = conn.add_s(dn, [modlist])
                 elif action == "modify":
-                    result = conn.modify_s([dn], modlist)
+                    result = conn.modify_s(dn, [modlist])
                 elif action == "delete":
-                    result = conn.delete_s([dn], modlist)
+                    result = conn.delete_s(dn, [modlist])
                 show_results(get_by_dn(conn, dn))
                 if ns.debug:
                     print(result, file=sys.stderr)
