@@ -220,7 +220,7 @@ def process(ns, dn, modlist, action="add"):
 
     if ns.debug:
         for i, x in enumerate(modlist):
-            print i, x
+            print(i, x)
     if ns.apply:
         conn = connection(ns)
         try:
@@ -233,10 +233,10 @@ def process(ns, dn, modlist, action="add"):
                     result = conn.delete_s(dn, modlist)
                 show_results(get_by_dn(conn, dn))
                 if ns.debug:
-                    print >>sys.stderr, result
+                    print(>>sys.stderr, result)
             except ldap.LDAPError, le:
-                print le.args[0].get("info", "No info")
-                print le.args[0].get("desc", "No description")
+                print(le.args[0].get("info", "No info"))
+                print(le.args[0].get("desc", "No description"))
                 sys.exit(1)
         finally:
             conn.unbind()
@@ -247,11 +247,11 @@ def process(ns, dn, modlist, action="add"):
 
 def show_results(results):
     for i, result in enumerate(results):
-        print "# {%s}" % i
-        print "dn:", result[0]
+        print("# {%s}" % i)
+        print("dn:", result[0])
         for k, vs in sorted(result[1].items()):
             for v in vs:
-                print "%s: %s" % (k, v)
+                print("%s: %s" % (k, v))
 
 #
 # COMMANDS
@@ -417,9 +417,9 @@ def recursive_delete(conn, base_dn, dry_run=True):
     for dn, _ in search:
         recursive_delete(conn, dn, dry_run)
     if dry_run:
-        print "Would delete:", base_dn
+        print("Would delete:", base_dn)
     else:
-        print "Deleting: ", base_dn
+        print("Deleting: ", base_dn)
         conn.delete_s(base_dn)
 
 
