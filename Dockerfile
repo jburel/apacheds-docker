@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER ome-devel@lists.openmicroscopy.org.uk
 
 #############################################
@@ -25,7 +25,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
     && apt-get install -y \
        ldap-utils \
        procps \
-       openjdk-8-jre-headless \
+       openjdk-11-jre-headless \
        curl \
        jq \
     && curl https://downloads.apache.org/directory/apacheds/dist/${APACHEDS_VERSION}/${APACHEDS_ARCHIVE} > ${APACHEDS_ARCHIVE} \
