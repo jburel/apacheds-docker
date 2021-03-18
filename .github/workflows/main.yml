@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo apt-get install ldap-utils python-ldap
+        run: |
+          sudo apt-get install ldap-utils
+          pip install python-ldap
       - name: Build
         run: ./gha_test.sh
