@@ -232,8 +232,8 @@ def process(ns, dn, modlist, action="add"):
                 elif action == "delete":
                     result = conn.delete_s(dn, modlist)
                 show_results(get_by_dn(conn, dn))
-                if ns.debug:
-                    print(>>sys.stderr, result)
+                #if ns.debug:
+                #    >>sys.stderr, result
             except ldap.LDAPError, le:
                 print(le.args[0].get("info", "No info"))
                 print(le.args[0].get("desc", "No description"))
