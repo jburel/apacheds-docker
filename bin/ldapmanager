@@ -197,7 +197,7 @@ def dn(ns, login, ou="Users"):
     id = "uid"
     if ou != "Users":
         id = "cn"
-    return "%s=%s,ou=%s,%s" % (id, login, ou, ns.base)
+    return "%s=[%s],ou=%s,[%s]" % (id, login, ou, ns.base)
 
 
 def dn_user(ns, login):
