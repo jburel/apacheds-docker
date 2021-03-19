@@ -216,7 +216,7 @@ def process(ns, dn, modlist, action="add"):
 
     # if "modify", assume list is already created
     if action == "add":
-        modlist = ldap.modlist.addModlist([modlist])
+        modlist = ldap.modlist.addModlist(modlist)
 
     if ns.debug:
         for i, x in enumerate(modlist):
@@ -226,6 +226,7 @@ def process(ns, dn, modlist, action="add"):
         try:
             try:
                 if action == "add":
+                    print(modlist)
                     result = conn.add_s(dn, modlist)
                 elif action == "modify":
                     result = conn.modify_s(dn, modlist)
