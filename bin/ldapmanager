@@ -226,7 +226,7 @@ def process(ns, dn, modlist, action="add"):
         try:
             try:
                 if action == "add":
-                    print(modlist)
+                    print(mod)
                     result = conn.add_s(dn, modlist)
                 elif action == "modify":
                     result = conn.modify_s(dn, modlist)
@@ -284,15 +284,15 @@ def _init(ns):
     actions = [
         ("ou=Users,%s" % ns.base, {
             "objectClass": [
-                "organizationalUnit",
-                "top"
+                "organizationalUnit".encode('utf-8'),
+                "top".encode('utf-8')
             ],
             "ou": ["Users"],
         }),
         ("ou=Groups,%s" % ns.base, {
             "objectClass": [
-                "organizationalUnit",
-                "top"
+                "organizationalUnit".encode('utf-8'),
+                "top".encode('utf-8')
             ],
             "ou": ["Groups"],
         }),
@@ -307,12 +307,12 @@ def _user(ns):
 
     modlist = {
         "objectClass": [
-            "organizationalPerson",
-            "person",
-            "extensibleObject",
-            "uidObject",
-            "inetOrgPerson",
-            "top"],
+            "organizationalPerson".encode('utf-8'),
+            "person".encode('utf-8'),
+            "extensibleObject".encode('utf-8'),
+            "uidObject".encode('utf-8'),
+            "inetOrgPerson".encode('utf-8'),
+            "top".encode('utf-8')],
         "cn": ["%s %s" % (ns.first, ns.last)],
         "givenName": [ns.first],
         "sn": [ns.last],
@@ -320,7 +320,7 @@ def _user(ns):
         "ou": ["Users"],
     }
     if ns.password:
-        modlist["userPassword"] = ns.password
+        modlist["userPassword"] = [ns.password]
     process(ns, ns.dn, modlist)
 
 
@@ -372,13 +372,13 @@ def _group(ns):
     members = set(ns.member)
     if ns.owner:
         rv = []
-        modlist["owner"] = rv
+        modlist["owner"] = [rv]
         for owner in ns.owner:
             rv.append(dn(ns, owner, ou="Users"))
             members.add(owner)
     if members:
         rv = []
-        modlist["uniqueMember"] = rv
+        modlist["uniqueMember"] = [rv]
         for member in members:
             rv.append(dn(ns, member, ou="Users"))
 
